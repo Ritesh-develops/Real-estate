@@ -2,6 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import userRouter from "./routes/user.routes.js"
+import authrouter from "./routes/auth.routes.js"
 dotenv.config();
 
 mongoose.connect(process.env.MONGODB).then(()=>{
@@ -17,4 +18,7 @@ app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT} `)
 })
 
+app.use(express.json());
+
 app.use("/api/user", userRouter)
+app.use('/api/auth', authrouter)
