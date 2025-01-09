@@ -1,8 +1,10 @@
 import React from 'react'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Header() {
+  const {currentUser} = useSelector(state=> state.user)
   return (
     <header className='bg-slate-200 shadow-md'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
@@ -26,8 +28,11 @@ function Header() {
         <Link to={"/about"}>
         <li className='hidden sm:inline hover:text-slate-950'>About</li>
         </Link>
-        <Link to={"/signin"}>
+        <Link to={"/profile"}>
+        {currentUser? 
+        (<img src={currentUser.avatar} alt='profile' className='rounded-full h-7 w-7 object-cover'></img>):
         <li className='hover:text-slate-950'>Sign in</li>
+        }
         </Link>
         
       </ul>
